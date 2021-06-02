@@ -5,7 +5,7 @@ describe("The Registration function", function() {
 
         registrationSetting.setReg("CK 123456");
 
-        assert.equal("CK 123456", registrationSetting.getReg());
+        assert.equal(["CK 123456"], registrationSetting.getReg());
     });
 
     it("should be able to set the registration number for Belville (CY)", function(){
@@ -14,7 +14,7 @@ describe("The Registration function", function() {
 
         registrationSetting.setReg("CY 232425");
 
-        assert.equal("CY 232425", registrationSetting.getReg());
+        assert.equal(["CY 232425"], registrationSetting.getReg());
     });
 
     it("should be able to set the registration number for Cape Town (CA)", function(){
@@ -23,29 +23,38 @@ describe("The Registration function", function() {
 
         registrationSetting.setReg("CA 333435");
 
-        assert.equal("CA 333435", registrationSetting.getReg());
+        assert.equal(["CA 333435"], registrationSetting.getReg());
     });
 });
 
 
 
 describe("The CheckValidate function", function() {
-    it("should only take these format CY 123-456, CA 123456, CK 567-89", function(){
+    it("should only take these format CA 333435", function(){
        
         let registrationSetting = Registration();
 
-        registrationSetting.setReg(["CA 333435", "CK 123-45", "CY 123-456"]);
+        registrationSetting.setReg(["CA 333435"]);
 
-        assert.deepEqual(["CA 333435","CK 123-45","CY 123-456"], registrationSetting.getReg());
+        assert.deepEqual(["CA 333435"], registrationSetting.getReg());
     });
 
-    it("should only take these format CK 123-456, CY 123456, CA 567-89", function(){
+    it("should only take these format CK 345-235", function(){
        
         let registrationSetting = Registration();
 
-        registrationSetting.setReg(["CK 333435", "CY 123-45", "CA 123-456"]);
+        registrationSetting.setReg(["CK 345-235"]);
 
-        assert.deepEqual(["CK 333435","CY 123-45","CA 123-456"], registrationSetting.getReg());
+        assert.deepEqual(["CK 345-235"], registrationSetting.getReg());
+    });
+
+    it("should only take these format CY 123-45", function(){
+       
+        let registrationSetting = Registration();
+
+        registrationSetting.setReg([ "CY 123-45"]);
+
+        assert.deepEqual(["CY 123-45"], registrationSetting.getReg());
     });
 });
 
